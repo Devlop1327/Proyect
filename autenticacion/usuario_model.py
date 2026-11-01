@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 import reflex as rx
 from sqlmodel import Field
@@ -10,7 +10,7 @@ class Usuario(rx.Model, table=True):
     Contraseña: str
     rol: str = "ciudadano"  # Roles: ciudadano, funcionario, administrador
     is_active: bool = True
-    Fecha_de_creacion: datetime = Field(default_factory=datetime.now)
+    Fecha_de_creacion: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     # Campos adicionales del registro ampliado
     tipo_identificacion: Optional[str] = None
     numero_identificacion: Optional[str] = None
@@ -40,7 +40,7 @@ class Solicitud(rx.Model, table=True):
     persona_vulnerable: Optional[str] = None
     estado: str = "Radicada"
     respuesta: Optional[str] = None
-    fecha: datetime = Field(default_factory=datetime.now)
+    fecha: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     fecha_respuesta: Optional[datetime] = None
     creado_por: Optional[str] = None
     usuario_id: Optional[int] = Field(default=None, foreign_key="usuario.id")

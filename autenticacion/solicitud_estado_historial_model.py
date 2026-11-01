@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timezone
 
 class SolicitudEstadoHistorial(SQLModel, table=True):
     """Historial de cambios de estado de una solicitud PQRS."""
@@ -8,6 +8,6 @@ class SolicitudEstadoHistorial(SQLModel, table=True):
     solicitud_id: int = Field(foreign_key="solicitud.id")
     estado_anterior: str
     estado_nuevo: str
-    fecha_cambio: datetime = Field(default_factory=datetime.now)
+    fecha_cambio: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     observaciones: Optional[str] = None
     documento_adjunto: Optional[str] = None
