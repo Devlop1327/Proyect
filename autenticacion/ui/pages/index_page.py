@@ -163,9 +163,9 @@ def quick_action_card(
                 height="100%",
                 width="100%",
             ),
-            p={"base": "5", "md": "5", "xl": "6"},
-            min_height="230px",
-            height="auto",
+            p={"base": "5", "md": "6", "xl": "7"},
+            min_height="240px",
+            height="100%",
             width="100%",
             border_radius="24px",
             bg=rx.color_mode_cond(
@@ -510,7 +510,7 @@ def index() -> rx.Component:
 
         # ── SECCIÓN: SERVICIOS / ACCIONES PRINCIPALES (Bento Cards Linear/Stripe) ───────
         rx.box(
-            rx.container(
+            rx.box(
                 rx.vstack(
                     rx.vstack(
                         rx.badge(
@@ -565,17 +565,19 @@ def index() -> rx.Component:
                             "/login",
                             "gray"
                         ),
-                        columns={"base": "1", "sm": "2", "xl": "4"},
-                        spacing={"base": "4", "md": "5", "xl": "6"},
+                        columns={"base": "1", "sm": "2", "lg": "4"},
+                        spacing={"base": "5", "md": "6"},
                         width="100%",
                     ),
                     spacing="8",
                     align_items="center",
                     width="100%",
                 ),
-                max_width="1340px",
-                padding_y="20",
-                padding_x={"base": "4", "md": "8"},
+                max_width="1440px",
+                width="100%",
+                mx="auto",
+                py={"base": "12", "md": "20"},
+                px={"base": "4", "sm": "6", "md": "8", "xl": "12"},
             ),
             width="100%",
             bg=PAGE_BG,

@@ -42,8 +42,9 @@ def create_initial_funcionario():
             INSERT INTO usuario (
                 email, Contraseña, rol, is_active, Fecha_de_creacion,
                 tipo_identificacion, numero_identificacion, nombres, apellidos,
-                genero, direccion, telefono, departamento, ciudad
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                genero, direccion, telefono, departamento, ciudad,
+                acepta_notificaciones, acepta_politica_datos
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 email,
@@ -60,6 +61,8 @@ def create_initial_funcionario():
                 telefono,
                 departamento,
                 ciudad,
+                0,  # acepta_notificaciones
+                0,  # acepta_politica_datos
             ),
         )
         conn.commit()

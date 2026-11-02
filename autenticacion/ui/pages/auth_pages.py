@@ -131,7 +131,7 @@ def auth_card(title: str, on_submit, show_confirm: bool = False) -> rx.Component
                             label_requerido("Contraseña"),
                             rx.hstack(
                                 rx.input(
-                                    placeholder="�?��?��?��?��?��?��?��?�",
+                                    placeholder="",
                                     type=rx.cond(State.show_password, "text", "password"),
                                     value=State.contraseña,
                                     on_change=State.set_contraseña,
@@ -314,7 +314,7 @@ def auth_card(title: str, on_submit, show_confirm: bool = False) -> rx.Component
                         rx.hstack(
                             rx.button("Atrás", type="button", size="3", variant="soft", on_click=State.set_registro_seccion_abierta("identidad")),
                             rx.spacer(),
-                            rx.text("�?ltimo paso", font_size="xs", color=rx.color_mode_cond(light="#64748b", dark="#94a3b8")),
+                            rx.text("último paso", font_size="xs", color=rx.color_mode_cond(light="#64748b", dark="#94a3b8")),
                             width="100%",
                         ),
                         spacing="4",
@@ -558,7 +558,7 @@ def auth_card(title: str, on_submit, show_confirm: bool = False) -> rx.Component
                         box_shadow="0 8px 20px -8px rgba(37, 99, 235, 0.55)",
                         is_disabled=(State.registro_paso_habilitado < 3) | (State.registro_seccion_abierta != "ubicacion"),
                     ),
-                    rx.link("¿Ya tienes una cuenta? Inicia sesión", href="/login", margin_left={"base": "0", "md": "4"}, color="#3b82f6", font_weight="medium"),
+                    rx.link("¿Ya tienes una cuenta Inicia sesión", href="/login", margin_left={"base": "0", "md": "4"}, color="#3b82f6", font_weight="medium"),
                     spacing="6",
                     justify={"base": "center", "md": "start"},
                     width="100%",

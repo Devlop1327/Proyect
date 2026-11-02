@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  pqrs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sistema_pqrs_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"   # Frontend
+      - "8000:8000"   # Backend API
+    environment:
+      - API_URL=http://localhost:8000
+      - DATABASE_URL=sqlite:////app/reflex.db
+    volumes:
+      # Persistencia de la base de datos y archivos subidos
+      - ./reflex.db:/app/reflex.db
+      - ./uploaded_files:/app/uploaded_files
+      - ./.web/public/uploads:/app/.web/public/uploads
+

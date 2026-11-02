@@ -35,7 +35,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Carpeta donde se guardarán los archivos subidos por los usuarios
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 UPLOAD_DIR = BASE_DIR / "uploaded_files"
 
 WEB_UPLOAD_DIR = BASE_DIR / ".web" / "public" / "uploads"
@@ -129,7 +129,7 @@ from ..services.storage_service import (
 )
 
 def _ultimo_adjunto_historial(solicitud_id: int) -> str:
-    """�?ltimo nombre de adjunto registrado en el historial de la solicitud."""
+    """último nombre de adjunto registrado en el historial de la solicitud."""
     if not solicitud_id:
         return ""
     try:
@@ -315,10 +315,10 @@ class State(rx.State):
                 obs_raw = h.observaciones or ""
                 doc = h.documento_adjunto or ""
                 if not doc:
-                    match = re.search(r"\[DOCUMENTO(?: ADJUNTO)?:\s*([^\]\|]+)\]", obs_raw)
+                    match = re.search(r"\[DOCUMENTO(: ADJUNTO):\s*([^\]\|]+)\]", obs_raw)
                     if match:
                         doc = match.group(1).strip()
-                        obs_raw = re.sub(r"\s*\[DOCUMENTO(?: ADJUNTO)?:[^\]]+\]", "", obs_raw).strip()
+                        obs_raw = re.sub(r"\s*\[DOCUMENTO(: ADJUNTO):[^\]]+\]", "", obs_raw).strip()
                 
                 adjuntos_metas = []
                 if doc:
@@ -439,7 +439,7 @@ class State(rx.State):
     "Cesar": ["Valledupar", "Aguachica", "Agustín Codazzi", "Bosconia", "Curumaní"],
     "Chocó": ["Quibdó", "Istmina", "Condoto", "Acandí", "Bahía Solano"],
     "Córdoba": ["Montería", "Cereté", "Sahagún", "Lorica", "Montelíbano", "Planeta Rica"],
-    "Cundinamarca": ["Soacha", "Chía", "Sopó", "Tausa", "Tenjo", "Tena", "Tocaima", "Tocancipá", "Zipaquirá", "Fúquene", "Pacho", "�?tica", "Villapinzón", "Villeta", "Facatativá", "Girardot", "Fusagasugá"],
+    "Cundinamarca": ["Soacha", "Chía", "Sopó", "Tausa", "Tenjo", "Tena", "Tocaima", "Tocancipá", "Zipaquirá", "Fúquene", "Pacho", "tica", "Villapinzón", "Villeta", "Facatativá", "Girardot", "Fusagasugá"],
     "Guainía": ["Inírida", "Barrancominas"],
     "Guaviare": ["San José del Guaviare", "Calamar", "El Retorno", "Miraflores"],
     "Huila": ["Neiva", "Pitalito", "Garzón", "La Plata", "Campoalegre", "San Agustín"],
@@ -663,7 +663,7 @@ class State(rx.State):
             }
             
             self.export_filename = filename
-            self.mostrar_toast(f"�?? CSV generado. {len(data)} registros. Descargando...", "success")
+            self.mostrar_toast(f" CSV generado. {len(data)} registros. Descargando...", "success")
             self.mostrar_menu_descarga = False
             self.export_href = f"/api/download/{download_id}"
             
@@ -687,7 +687,7 @@ class State(rx.State):
             filename = _nombre_archivo_excel_reporte(self.filter_tipo_solicitud)
             self.mostrar_menu_descarga = False
             self.mostrar_toast(
-                f"Excel con gráfica generado ({len(data)} registros �?? {self.filter_tipo_solicitud}).",
+                f"Excel con gráfica generado ({len(data)} registros  {self.filter_tipo_solicitud}).",
                 "success",
             )
             return rx.download(
@@ -1961,7 +1961,7 @@ class State(rx.State):
             self.mensaje_actualizar_estado = "Debes escribir una justificación para el cambio de estado."
             yield State.clear_mensajes_delay
             return
-        # Si es Asignada a Area, validar que el area est?© seleccionada
+        # Si es Asignada a Area, validar que el area está© seleccionada
         if self.nuevo_estado == "Asignada a Area" and not str(self.area_para_asignar or "").strip():
             self.mensaje_actualizar_estado = "Selecciona el área a la que se va a asignar la solicitud."
             yield State.clear_mensajes_delay
@@ -2655,7 +2655,7 @@ Sistema PQRS
             self.error_de_registro = "Debes aceptar la política de datos y recibir notificaciones para registrarte."
             return
 
-    def _crear_usuario(self, rol: str, exito_mensaje: str):
+    def _crear_usuario(self, rol: str, éxito_mensaje: str):
         with rx.session() as session:
             correo_normalizado = str(self.correo or "").strip().lower()
             existing_user = session.exec(select(Usuario).where(Usuario.email == correo_normalizado)).first()
@@ -2688,7 +2688,7 @@ Sistema PQRS
         print(f"Usuario registrado: {self.correo}")
         # Dispara el correo de bienvenida inmediatamente después del registro.
         enviar_correo_bienvenida(self.correo, self.correo)
-        self.succes = exito_mensaje
+        self.succes = éxito_mensaje
         self.mostrar_toast("¡Registro exitoso! Bienvenido al sistema.", "success")
         # Obtener el id del usuario recién creado para completar la sesión
         correo_registrado = str(self.correo or "").strip().lower()
@@ -2717,7 +2717,7 @@ Sistema PQRS
             return
         self._crear_usuario(
             rol="ciudadano",
-            exito_mensaje="Registro exitoso. Revisa tu correo para confirmar. Ahora el funcionario puede iniciar sesión.",
+            éxito_mensaje="Registro exitoso. Revisa tu correo para confirmar. Ahora el funcionario puede iniciar sesión.",
         )
         # Redirigir al dashboard del ciudadano después del registro
         if not self.error_de_registro:
@@ -2733,7 +2733,7 @@ Sistema PQRS
             return
         return self._crear_usuario(
             rol="funcionario",
-            exito_mensaje="Funcionario registrado con éxito. Ahora puede iniciar sesión con su correo institucional.",
+            éxito_mensaje="Funcionario registrado con ééxito. Ahora puede iniciar sesión con su correo institucional.",
         )
 
     def login(self, form_data: dict | None = None):
@@ -2780,7 +2780,7 @@ Sistema PQRS
             self.contraseña = ""
             self.confirmar_contraseña = ""
             self.show_password = False
-            self.mostrar_toast("Inicio de sesión exitoso! Redirigiendo automaticamente...", "success")
+            self.mostrar_toast("Inicio de sesión exitoso! Redirigiendo automáticamente...", "success")
             # Redirigir después de mostrar el toast
             if self.rol_usuario == "funcionario":
                 return rx.redirect("/dashboard-funcionario")
@@ -2813,7 +2813,7 @@ Sistema PQRS
         self.es_autentica = "false"
         self.nombres = ""
         self.show_password = False
-        self.succes2 = "Has cerrado sesión exitosamente."
+        self.succes2 = "Has cerrado sesión éxitosamente."
         self.error_de_contraseña = ""
         return rx.redirect("/")
 
@@ -3005,7 +3005,7 @@ Sistema PQRS
                 except Exception:
                     logger.exception("Error enviando notificación de cambio de estado para solicitud %s", getattr(solicitud_obj, 'id', None))
 
-                self.solicitud_mensaje = "Solicitud actualizada con éxito."
+                self.solicitud_mensaje = "Solicitud actualizada con ééxito."
                 self.editar_solicitud_id = 0
                 self.limpiar_formulario_solicitud(keep_message=True)
                 self.cargar_solicitudes()
@@ -3074,7 +3074,7 @@ Sistema PQRS
             except Exception:
                 logger.exception("Error enviando notificación de creación de solicitud para %s", getattr(solicitud_obj, 'id', None))
 
-            self.solicitud_mensaje = f"✅ Solicitud enviada con exito. Radicado: {radicado_generado}"
+            self.solicitud_mensaje = f"✅ Solicitud enviada con éxito. Radicado: {radicado_generado}"
             self.limpiar_formulario_solicitud(keep_message=True)
             self.cargar_solicitudes()
             yield rx.clear_selected_files("upload_solicitud")
@@ -3181,10 +3181,10 @@ Sistema PQRS
                     
                     doc = h.documento_adjunto or ""
                     if not doc:
-                        match = re.search(r"\[DOCUMENTO(?: ADJUNTO)?:\s*([^\]\|]+)\]", obs_clean)
+                        match = re.search(r"\[DOCUMENTO(: ADJUNTO):\s*([^\]\|]+)\]", obs_clean)
                         if match:
                             doc = match.group(1).strip()
-                            obs_clean = re.sub(r"\s*\[DOCUMENTO(?: ADJUNTO)?:[^\]]+\]", "", obs_clean).strip()
+                            obs_clean = re.sub(r"\s*\[DOCUMENTO(: ADJUNTO):[^\]]+\]", "", obs_clean).strip()
 
                     # Construir lista completa de adjuntos (soporta lista separada por comas)
                     documento_adjuntos_list = []
@@ -3444,7 +3444,7 @@ Sistema PQRS
                 except:
                     pass  # No fallar si no se envía el correo
                 
-                self.cambiar_rol_mensaje = f"�?? Rol del usuario {self.cambiar_rol_email} actualizado a funcionario."
+                self.cambiar_rol_mensaje = f" Rol del usuario {self.cambiar_rol_email} actualizado a funcionario."
                 self.cambiar_rol_email = ""
                 self.confirmar_promocion_rol = False
                 self.cargar_usuarios()
@@ -3496,7 +3496,7 @@ Sistema PQRS
             except Exception:
                 pass
 
-            self.cambiar_rol_mensaje = f"�?? Rol del usuario {email_norm} actualizado a ciudadano."
+            self.cambiar_rol_mensaje = f" Rol del usuario {email_norm} actualizado a ciudadano."
             self.cargar_usuarios()
         except Exception as e:
             self.cambiar_rol_mensaje = f"Error al cambiar rol: {e}"

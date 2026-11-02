@@ -46,7 +46,7 @@ def solicitudes_page() -> rx.Component:
             rx.box(
                 rx.vstack(
  
-                    # �??�?? Encabezado �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Encabezado 
                     rx.vstack(
                         rx.hstack(
                             rx.box(
@@ -78,7 +78,7 @@ def solicitudes_page() -> rx.Component:
                         width="100%",
                     ),
 
-                    # �??�?? Datos de contacto (Solo para no registrados) �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Datos de contacto (Solo para no registrados) 
                     rx.cond(
                         ~State.es_autenticada,
                         _section("mail", "Datos de contacto",
@@ -100,7 +100,7 @@ def solicitudes_page() -> rx.Component:
                         ),
                     ),
  
-                    # �??�?? Sección 1: Tipo + Área �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Sección 1: Tipo + Área 
                     _section("tag", "Clasificación de la solicitud",
                         rx.grid(
                             rx.vstack(
@@ -149,7 +149,7 @@ def solicitudes_page() -> rx.Component:
                         ),
                     ),
  
-                    # �??�?? Sección 2: Asunto + Descripción �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Sección 2: Asunto + Descripción 
                     _section("file-text", "Detalle de la solicitud",
                         rx.vstack(
                             rx.vstack(
@@ -194,7 +194,7 @@ def solicitudes_page() -> rx.Component:
                         ),
                     ),
  
-                    # �??�?? Sección 3: Adjuntos �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Sección 3: Adjuntos 
                     _section("paperclip", "Documento adjunto (opcional)",
                         rx.vstack(
                             rx.text(
@@ -202,7 +202,7 @@ def solicitudes_page() -> rx.Component:
                                 font_size="12px", color=TEXT_SUB, line_height="1.6",
                             ),
  
-                            # �??�?? Zona de carga: widget JS autocontenido �??�??�??�??�??�??
+                            #  Zona de carga: widget JS autocontenido 
                             rx.script("""
 window.__pqrsUpload = window.__pqrsUpload || (function(){
     function init(root){
@@ -241,9 +241,9 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
             const pct=Math.min(100,(used/MAX)*100);
  
             // barra
-            barW.style.display = list.length?'block':'none';
+            barW.style.display = list.length'block':'none';
             bar.style.width    = pct+'%';
-            const col = pct>=95?'#ef4444':pct>=75?'#f59e0b':'#10b981';
+            const col = pct>=95'#ef4444':pct>=75'#f59e0b':'#10b981';
             bar.style.background=col;
             usedL.textContent = fmt(used)+' usado';
             freeL.textContent = fmt(free)+' libres';
@@ -303,20 +303,20 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
             clearErr();
             for(const f of inc){
                 if(!OK.includes(ext(f.name))){
-                    showErr('�? Formato ".' + ext(f.name) + '" no permitido. Solo se aceptan PDF, PNG o JPG.');
+                    showErr(' Formato ".' + ext(f.name) + '" no permitido. Solo se aceptan PDF, PNG o JPG.');
                     this.value=''; return;
                 }
                 if(f.size>MAX){
-                    showErr('�? "'+f.name+'" supera el límite de 10 MB.');
+                    showErr(' "'+f.name+'" supera el límite de 10 MB.');
                     this.value=''; return;
                 }
                 if(list.some(function(e){return e.name===f.name&&e.size===f.size;})) continue;
                 if(list.length>=MAX_N){
-                    showErr('�? Solo puedes adjuntar hasta '+MAX_N+' archivos.');
+                    showErr(' Solo puedes adjuntar hasta '+MAX_N+' archivos.');
                     this.value=''; return;
                 }
                 if(total()+f.size>MAX){
-                    showErr('�? Agregar "'+f.name+'" superaría el límite. Libre: '+fmt(MAX-total()));
+                    showErr(' Agregar "'+f.name+'" superaría el límite. Libre: '+fmt(MAX-total()));
                     this.value=''; return;
                 }
                 list.push({name:f.name,size:f.size});
@@ -472,7 +472,7 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
                         ),
                     ),
  
-                    # �??�?? Autorización �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Autorización 
                     rx.hstack(
                         rx.checkbox(
                             is_checked=State.acepta_politica_solicitud,
@@ -501,7 +501,7 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
                         width="100%",
                     ),
  
-                    # �??�?? Botón enviar �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Botón enviar 
                     rx.button(
                         rx.hstack(
                             rx.icon("send", size=16),
@@ -533,7 +533,7 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
                         is_disabled=~State.acepta_politica_solicitud,
                     ),
 
-                    # �??�?? Mensaje resultado �??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??�??
+                    #  Mensaje resultado 
                     rx.cond(
                         State.solicitud_mensaje != "",
                         rx.hstack(

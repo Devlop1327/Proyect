@@ -118,7 +118,7 @@ http://localhost:3000
 ## 8. Comandos útiles
 
 - Activar entorno virtual:
-  - `.\.venv\Scripts\Activate.ps1`
+  - .\.venv\Scripts\activate
 - Instalar dependencias Python:
   - `pip install -r requirements.txt`
 - Instalar dependencias Node:

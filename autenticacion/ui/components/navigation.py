@@ -1,4 +1,4 @@
-from ...state import State
+﻿from ...state import State
 import reflex as rx
 from ...usuario_model import Usuario
 
@@ -326,7 +326,7 @@ def logout_confirm_modal():
                             width="100%",
                         ),
                         rx.text(
-                            "¿Cerrar sesión?",
+                            "¿Cerrar sesión",
                             font_size="22px",
                             font_weight="800",
                             color="white",
@@ -431,7 +431,7 @@ def toast_notification() -> rx.Component:
                 ),
                 rx.vstack(
                     rx.text(
-                        rx.cond(State.toast_tipo == "success", "¡�?xito!", "Error"),
+                        rx.cond(State.toast_tipo == "success", "¡Éxito!", "Error"),
                         font_weight="bold",
                         color="white",
                         font_size="sm",
