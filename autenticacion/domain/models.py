@@ -1,15 +1,15 @@
 """Modelos de dominio y estructuras de datos auxiliares para el módulo de autenticación."""
-import reflex as rx
+from pydantic import BaseModel
 
 
-class AdjuntoMeta(rx.Base):
+class AdjuntoMeta(BaseModel):
     documento_adjunto: str
     documento_href: str
     documento_preview_src: str
     documento_existe: bool
 
 
-class HistorialEvento(rx.Base):
+class HistorialEvento(BaseModel):
     fecha: str
     anterior: str
     nuevo: str
@@ -21,7 +21,7 @@ class HistorialEvento(rx.Base):
     adjuntos: list[AdjuntoMeta]
 
 
-class HistorialSolicitudEvento(rx.Base):
+class HistorialSolicitudEvento(BaseModel):
     estado_anterior: str
     estado_nuevo: str
     fecha_cambio: str
@@ -32,4 +32,3 @@ class HistorialSolicitudEvento(rx.Base):
     documento_preview_src: str
     documento_existe: bool
     adjuntos: list[AdjuntoMeta]
-

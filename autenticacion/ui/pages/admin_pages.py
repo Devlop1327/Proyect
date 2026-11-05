@@ -316,7 +316,7 @@ def cambiar_rol_page() -> rx.Component:
                             # Botón
                             rx.button(
                                 rx.hstack(
-                                    rx.icon("arrow-up-circle", size=16),
+                                    rx.icon("circle-arrow-up", size=16),
                                     rx.text("Promover a Funcionario", font_size="14px", font_weight="600"),
                                     spacing="2",
                                 ),
@@ -353,5 +353,4 @@ def cambiar_rol_page() -> rx.Component:
         State.es_autenticada & (State.rol_usuario == "funcionario"),
         contenido, acceso_denegado,
     )
-
 

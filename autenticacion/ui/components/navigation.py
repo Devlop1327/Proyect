@@ -75,11 +75,11 @@ def navbar() -> rx.Component:
                 nav_icon_link("users", "Ver Usuarios", "/usuarios", display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
                 nav_icon_link("user-plus", "Registrar Func.", "/registro-funcionario", display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
                 nav_icon_link("settings", "Cambiar Rol", "/cambiar-rol", display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
-                nav_icon_link("help-circle", "Ayuda", "/ayuda-funcionario", display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
+                nav_icon_link("circle-help", "Ayuda", "/ayuda-funcionario", display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
                 
                 # Dashboards
-                nav_icon_link("layout", "Dashboard Func.", "/dashboard-funcionario", active=True, display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
-                nav_icon_link("layout", "Mi Panel", "/dashboard", active=True, display_cond=State.es_autenticada & (State.rol_usuario != "funcionario")),
+                nav_icon_link("layout-dashboard", "Dashboard Func.", "/dashboard-funcionario", active=True, display_cond=State.es_autenticada & (State.rol_usuario == "funcionario")),
+                nav_icon_link("layout-dashboard", "Mi Panel", "/dashboard", active=True, display_cond=State.es_autenticada & (State.rol_usuario != "funcionario")),
                 
                 spacing="2",
                 align_items="center",
@@ -97,7 +97,7 @@ def navbar() -> rx.Component:
                     State.es_autenticada,
                     rx.hstack(
                         rx.box(
-                            rx.icon("user-circle", size=20, color="rgba(255,255,255,0.9)"),
+                            rx.icon("circle-user-round", size=20, color="rgba(255,255,255,0.9)"),
                             id="navbar-user-avatar",
                             width="36px",
                             height="36px",
@@ -486,5 +486,4 @@ def toast_notification() -> rx.Component:
         ),
         rx.box()
     )
-
 

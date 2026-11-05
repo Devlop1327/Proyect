@@ -23,6 +23,7 @@ DATABASE_URL = os.getenv("DATABASE_URL", DEFAULT_DATABASE_URL)
 config = rx.Config(
     app_name="autenticacion",
     db_url=DATABASE_URL,
+    state_auto_setters=True,
     plugins=[
         rx.plugins.SitemapPlugin(),
         rx.plugins.TailwindV4Plugin(),

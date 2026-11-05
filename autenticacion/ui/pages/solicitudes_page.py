@@ -241,9 +241,9 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
             const pct=Math.min(100,(used/MAX)*100);
  
             // barra
-            barW.style.display = list.length'block':'none';
+            barW.style.display = list.length ? 'block' : 'none';
             bar.style.width    = pct+'%';
-            const col = pct>=95'#ef4444':pct>=75'#f59e0b':'#10b981';
+            const col = pct >= 95 ? '#ef4444' : pct >= 75 ? '#f59e0b' : '#10b981';
             bar.style.background=col;
             usedL.textContent = fmt(used)+' usado';
             freeL.textContent = fmt(free)+' libres';
@@ -463,7 +463,7 @@ window.__pqrsUpload = window.__pqrsUpload || (function(){
                             rx.cond(
                                 State.archivo_error_mensaje != "",
                                 rx.hstack(
-                                    rx.icon("alert-circle", size=14, color=RED_ERR),
+                                    rx.icon("circle-alert", size=14, color=RED_ERR),
                                     rx.text(State.archivo_error_mensaje, font_size="12px", color=RED_ERR),
                                     spacing="2", align_items="center",
                                 ),
