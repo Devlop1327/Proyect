@@ -97,23 +97,6 @@ SAMPLE_USUARIOS = [
         "acepta_notificaciones": True,
         "acepta_politica_datos": True,
     },
-    {
-        "email": "hinolopez6@gmail.com",
-        "password": "Hino2026!",
-        "nombres": "Hino",
-        "apellidos": "López",
-        "tipo_identificacion": "Cédula de ciudadanía",
-        "numero_identificacion": "1234567890",
-        "sexo": "Otro",
-        "direccion": "Calle Falsa 123",
-        "telefono": "3111234567",
-        "departamento": "Cundinamarca",
-        "ciudad": "Bogotá",
-        "etnia": "Ninguna",
-        "persona_vulnerable": "Ninguna",
-        "acepta_notificaciones": True,
-        "acepta_politica_datos": True,
-    },
 ]
 
 INSERT_SQL = """
@@ -141,6 +124,9 @@ INSERT INTO usuario (
 
 
 def main() -> None:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
     db_path = Path(engine.url.database)
     if not db_path.exists():
         print(f"ERROR: no se encuentra la base de datos en {db_path}")

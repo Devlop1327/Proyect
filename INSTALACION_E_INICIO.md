@@ -162,6 +162,8 @@ Ejecuta estos comandos desde la raíz del proyecto con el entorno virtual activo
   - `python scripts/create_funcionario.py admin2@empresa.com MiContraseña123! "Nombres" "Apellidos" --identificacion 123456 --tipo-identificacion CC --telefono 3001234567 --direccion "Calle 1 #2-3" --departamento Antioquia --ciudad Medellín`
 - Crear varios ciudadanos de ejemplo:
   - `python scripts/crear_ciudadanos_ejemplo.py`
+- Crear el funcionario de demostración (solo para desarrollo local):
+  - `python scripts/create_funcionario.py funcionario.demo@ejemplo.com "FuncionarioDemo!2026" "Laura" "García" --identificacion 900000001 --tipo-identificacion CC --telefono 3000000001 --direccion "Calle de Prueba 123" --departamento Cundinamarca --ciudad Bogotá`
 - Crear solicitudes de ejemplo (requiere ciudadanos existentes):
   - `python scripts/crear_solicitudes_ejemplo.py`
 - Crear solicitudes adicionales de ejemplo:

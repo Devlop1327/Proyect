@@ -178,6 +178,9 @@ SAMPLE_SOLICITUDES = [
 
 
 def main() -> None:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+
     db_path = Path(engine.url.database)
     if not db_path.exists():
         print(f"ERROR: no se encuentra la base de datos en {db_path}")
